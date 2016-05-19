@@ -4,6 +4,13 @@ def hasName(x):
         if isinstance(x, str):
             return 1
         return 0
+
+def convertAnimalType(x):
+    if x.lower() == 'cat':
+        return 1
+    if x.lower() == 'dog':
+        return -1
+    return 0
     
 def intact(x):
     x = x.lower()
