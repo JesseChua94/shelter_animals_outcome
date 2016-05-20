@@ -1,9 +1,17 @@
 import dogGroups as dg
+import datetime as dt
 
 def hasName(x):
-        if isinstance(x, str):
-            return 1
-        return 0
+        return 1 if isinstance(x, str) else 0
+
+def getNameLength(x):
+    return lengthOfLabel(x)
+
+def getColourLength(x):
+    return lengthOfLabel(x)
+
+def lengthOfLabel(x):
+    return len(x) if isinstance(x, str) else -1
 
 def convertAnimalType(x):
     if x.lower() == 'cat':
@@ -11,6 +19,25 @@ def convertAnimalType(x):
     if x.lower() == 'dog':
         return -1
     return 0
+
+def timeToYear(x):
+    return getDateTimeObject(x).year
+
+def timeToSeason(x):
+    seasons = [1,1,1,2,2,2,3,3,3,4,4,4]
+    return seasons[monthOfYear(x) - 1]
+
+def dayOfWeek(x):
+    return getDateTimeObject(x).day
+
+def monthOfYear(x):
+    return getDateTimeObject(x).month
+    
+def timeToHourOfDay(x):
+    return getDateTimeObject(x).hour
+
+def getDateTimeObject(x):
+    return dt.datetime.strptime(x, "%Y-%m-%d %H:%M:%S")
     
 def intact(x):
     x = x.lower()
@@ -32,12 +59,51 @@ def convertAgeToMonths(x):
     x[0] = int(x[0])
     if len(x) == 1:
         return -1
-    if x[1] == "years":
-        return x[0] / 12
-    if x[1] == "weeks":
+    if "year" in x[1]:
+        return x[0] * 12
+    if "week" in x[1]:
         return x[0] / 4
-    if x[1] == "days":
+    if "day" in x[1]:
         return x[0] / 30
+    return x[0]
+
+def convertAgeToWeeks(x):
+    x = x.split()
+    x[0] = int(x[0])
+    if len(x) == 1:
+        return -1
+    if "year" in x[1]:
+        return x[0] * 48
+    if "month" in x[1]:
+        return x[0] * 4
+    if "day" in x[1]:
+        return x[0] / 7
+    return x[0]
+
+def convertAgeToYears(x):
+    x = x.split()
+    x[0] = int(x[0])
+    if len(x) == 1:
+        return -1
+    if "month" in x[1]:
+        return x[0] / 12
+    if "week" in x[1]:
+        return x[0] / 48
+    if "day" in x[1]:
+        return x[0] / 365
+    return x[0]
+
+def convertAgeToDays(x):
+    x = x.split()
+    x[0] = int(x[0])
+    if len(x) == 1:
+        return -1
+    if "month" in x[1]:
+        return x[0] * 30
+    if "week" in x[1]:
+        return x[0] * 7
+    if "year" in x[1]:
+        return x[0] * 365
     return x[0]
 
 def isShihTzu(x):
