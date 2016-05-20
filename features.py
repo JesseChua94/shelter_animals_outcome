@@ -1,17 +1,15 @@
 import dogGroups as dg
 import datetime as dt
+import re
 
 def hasName(x):
-        return 1 if isinstance(x, str) else 0
+        return 2 if isinstance(x, str) else -1
 
 def getNameLength(x):
-    return lengthOfLabel(x)
+    return len(x) if isinstance(x, str) else -1
 
 def getColourLength(x):
-    return lengthOfLabel(x)
-
-def lengthOfLabel(x):
-    return len(x) if isinstance(x, str) else -1
+    return len(re.findall(r"[\w]+", x))
 
 def convertAnimalType(x):
     if x.lower() == 'cat':
@@ -44,7 +42,7 @@ def intact(x):
     if x == "unknown":
         return 0
     if ("spayed" in x or "neutered" in x):
-        return -1
+        return 3
     return 1
 
 def gender(x):
@@ -105,6 +103,11 @@ def convertAgeToDays(x):
     if "year" in x[1]:
         return x[0] * 365
     return x[0]
+
+def isYoung(x):
+    if int(x) < 10:
+        return 1
+    return -1
 
 def isShihTzu(x):
     return 1 if "Shih Tzu" in x else 0
